@@ -671,7 +671,7 @@ if st.session_state.vectorstore:
 
         with st.spinner("Retrieving context and generating answer…"):
             retriever = st.session_state.vectorstore.as_retriever(search_kwargs={"k": top_k})
-            source_docs = retriever.get_relevant_documents(user_input)
+            source_docs = retriever.invoke(user_input)
             context = "\n\n---\n\n".join([d.page_content for d in source_docs])
 
             msgs = build_prompt(
